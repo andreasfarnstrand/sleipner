@@ -1,0 +1,6 @@
+.event-time,
+.event-date {
+	text-align: center;
+	width: 100%;
+	cursor: pointer;
+}
