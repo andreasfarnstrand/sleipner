@@ -81,6 +81,25 @@
 
 			}
 
+			if( $post->post_type == 'sleipner_event' && $template_type == 'archive' ) {
+
+				// Get the template slug
+		    $template_slug = rtrim( $template, '.php' );
+		    $template_file = $template_type . '-sleipner_event.php';
+
+		    // Check if a custom template exists in the theme folder, if not, load the plugin template file
+		    if( $template_result = locate_template( array( 'plugins/sleipner/templates/' . $template_file ) ) ) {
+
+		        return $template_result;
+
+		    } else if( file_exists( SLEIPNER_PATH . '/templates/' . $template_file ) ) {
+		    	
+		    	return SLEIPNER_PATH . '/templates/' . $template_file;
+
+		    }
+
+			}
+
 			return $template;
 
 		}

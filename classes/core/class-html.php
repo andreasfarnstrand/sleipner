@@ -43,7 +43,12 @@
         }
 
       }
-      $html .= "<$type $attributes>";
+
+      // Only wrap in tags if not type is text
+      if( $type != 'text' ) {
+        $html .= "<$type $attributes>";
+      }
+      
 
 
       // Parse the value. Forward it to function if it is an array to be parsed
@@ -63,7 +68,9 @@
       }
 
       // Close the element
-      $html .= "</$type>";
+      if( $type != 'text' ) {
+        $html .= "</$type>";
+      }
 
       return $html;
 

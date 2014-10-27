@@ -4,3 +4,5 @@
 	width: 100%;
 	cursor: pointer;
 }
+
+#ui-datepicker-div {display: none;}

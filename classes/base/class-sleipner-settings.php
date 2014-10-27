@@ -27,7 +27,7 @@
 
       global $pagenow;
 
-      $this->options = get_option( 'sleipner', array() );
+      $this->options = self::get_options();
 
       add_action( 'admin_menu', array( $this, 'add_plugin_page' ) );
       add_action( 'admin_init', array( $this, 'page_init' ) );
@@ -35,6 +35,20 @@
       if( $pagenow == 'options-general.php' ) {
         add_action( 'admin_enqueue_scripts', array( $this, 'add_scripts' ) );
       }
+
+    }
+
+
+    /**
+     * get_options
+     * 
+     * Get the plugin options
+     * 
+     * @return array The array with the plugin options
+     */
+    public static function get_options() {
+
+      return get_option( 'sleipner', array() );
 
     }
 
@@ -175,6 +189,14 @@
         'events' // Section           
       );
 
+      add_settings_field(
+        'output_template_css', // ID
+        __( 'Enable default css for the event templates.', SLEIPNER_TEXTDOMAIN ), // Title 
+        array( $this, 'output_template_css_callback' ), // Callback
+        'sleipner', // Page
+        'events' // Section           
+      );
+
 
       /* SECTION CATEGORIES */
 
@@ -210,6 +232,7 @@
       $new_input = array();
       $new_input['enable_country'] = isset( $input['enable_country'] ) ? true : false;
       $new_input['enable_categories'] = isset( $input['enable_categories'] ) ? true : false;
+      $new_input['output_template_css'] = isset( $input['output_template_css'] ) ? true : false;
       $new_input['google_maps_api_key'] = isset( $input['google_maps_api_key'] ) ? $input['google_maps_api_key'] : null;
       $new_input['map_default_lat'] = isset( $input['map_default_lat'] ) ? (float) $input['map_default_lat'] : null;
       $new_input['map_default_lng'] = isset( $input['map_default_lng'] ) ? (float) $input['map_default_lng'] : null;
@@ -306,6 +329,19 @@
 
       $hue = isset( $this->options['map_hue'] ) ? $this->options['map_hue'] : null;
       echo '#<input type="text" id="sleipner-map-hue" value="' . $hue . '" name="sleipner[map_hue]" maxlength="6" />';
+
+    }
+
+
+    /**
+     * output_css_callback
+     * 
+     * HTMLCallback
+     */
+    public function output_template_css_callback() {
+
+      $checked = ($this->output_template_css == true) ? $this->output_template_css : false;
+      echo '<input type="checkbox" name="sleipner[output_template_css]"' . checked( $checked, true, false ) . '/><br />';
 
     }
 

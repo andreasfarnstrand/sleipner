@@ -367,6 +367,19 @@
 		}
 
 
+		/**
+		 * 
+		 * @param string $key
+		 * 
+		 * @return boolean
+		 */
+		public function __isset( $key ) {
+
+			return isset( $this->fields[$key] );
+
+		}
+
+
 		public static function admin_interface() {
 
 			foreach( self::$meta_boxes as $box ) {

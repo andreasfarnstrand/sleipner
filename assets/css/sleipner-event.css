@@ -1,3 +1,8 @@
+.sleipner-event-wrapper {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
 .sleipner-event-section {
 	width: 100%;
 	margin-bottom: 10px;
@@ -7,7 +12,6 @@
 	font-weight: bold;
 	font-size: 1.2rem;
 	width: 100%;
-	border-bottom: 1px solid #ddd;
 }
 
 .sleipner-event-output-label {
@@ -19,7 +23,9 @@
 
 .sleipner-event-output-text {
 	float: left;
-	width: 70%;
+	width: 100%;
+	display: inline-table;
+	min-height: 20px;
 }
 
 .clearfix {
@@ -31,5 +37,65 @@
 #sleipner-map-canvas {
 	width: 100%;
 	height: 400px;
-	margin-top: 20px;
+}
+
+.sleipner-event-clearfix {
+	display: inline-block;
+	width: 100%;
+	clear: both;
+}
+
+.sleipner-archive-event-wrapper {
+	padding-left: 10px;
+	padding-right: 10px;
+	border-bottom: 1px solid #cecece !important;
+}
+
+.sleipner-archive-event-wrapper img {
+	box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  border: 1px solid #cecece !important;
+  padding: 4px;
+  background-color: #fff;
+  -webkit-border-radius: 2px; 
+  -moz-border-radius: 2px; 
+  -o-border-radius: 2px; 
+  border-radius: 2px;
+  zoom: 1.0;
+  -moz-box-shadow: 3px 3px 8px #ccc; /* Firefox */
+  -webkit-box-shadow: 3px 3px 8px #ccc; /w* Safari/Chrome */
+  box-shadow: 3px 3px 8px #ccc; /* Opera and other CSS3 supporting browsers */
+  margin-right: 1.5em;
+  margin-bottom: .5em;
+  display: inline;
+  float: left;
+}
+
+.sleipner-archive-event-wrapper p {
+	padding: 5px 0px 0px 0px;
+  margin: 0px;
+}
+
+.sleipner-archive-event-wrapper .sleipner-event-archive-description {
+	float:left;
+	display:block;
+}
+
+.sleipner-archive-event-wrapper .sleipner-event-archive-content p strong {
+	margin-right: 5px;
+}
+
+.sleipner-archive-event-wrapper .sleipner-event-archive-content strong {
+	margin-right: 5px;
+	margin-top: 5px;
+}
+
+.sleipner-archive-event-wrapper a {
+ 	float: right;
+ 	margin-top: 10px;
+}
+
+.sleipner-archive-event-excerpt {
+	
 }

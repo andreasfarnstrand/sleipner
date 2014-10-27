@@ -19,10 +19,12 @@
 
   require_once( SLEIPNER_PATH . '/classes/core/posttypes/class-posttype-model.php' );
   require_once( SLEIPNER_PATH . '/classes/core/class-html.php' );
+  require_once( SLEIPNER_PATH . '/classes/base/class-sleipner-settings.php' );
 
 	use Sleipner\Core\Posttypes\Posttype_Model;
   use Sleipner\Core\Posttypes\Interface_Posttype;
   use Sleipner\Core;
+  use Sleipner\Base\Sleipner_Settings as Settings;
 
 
 	class Sleipner_Event extends Posttype_Model {
@@ -103,8 +105,10 @@
 
       global $post;
 
-      $options = get_option( 'sleipner' );
+      // Get the plugin settings
+      $options = Settings::get_options();
 
+      // Init a new event instance from a post object
       $event = Sleipner_Event::fromPostObject( $post );
 
       if( isset( $event ) && is_object( $event ) && $event->post_type == self::$posttype ) {
@@ -113,7 +117,11 @@
         
         if(is_single()) {
           wp_enqueue_script( 'sleipner-frontend', SLEIPNER_URL.'assets/js/sleipner-event.js', array( 'jquery' ), false, true );
-          wp_enqueue_style( 'sleipner-frontend-style', SLEIPNER_URL . 'assets/css/sleipner-event.css' );
+          
+          // Check if css should be loaded for template
+          if( isset( $options['output_template_css'] ) && $options['output_template_css'] == true ) {
+            wp_enqueue_style( 'sleipner-frontend-style', SLEIPNER_URL . 'assets/css/sleipner-event.css' );
+          }
 
           $coordinates = $event->location_coordinates;
           $coordinates_string = $coordinates;
@@ -140,6 +148,15 @@
               'images_dir' => SLEIPNER_URL . '/images/'
             )
           );
+        }
+
+        if( is_archive() ) {
+          //wp_enqueue_script( 'sleipner-frontend', SLEIPNER_URL.'assets/js/sleipner-event.js', array( 'jquery' ), false, true );
+          
+          // Check if css should be loaded for template
+          if( isset( $options['output_template_css'] ) && $options['output_template_css'] == true ) {
+            wp_enqueue_style( 'sleipner-frontend-style', SLEIPNER_URL . 'assets/css/sleipner-event.css' );
+          }
         }
 
       }
@@ -548,166 +565,204 @@
       // This is the array representing the single event
       $event_output = array(
         
-        /* Event title */
-        array(
-          'type' => 'h1',
-          'attributes' => array(
-            'class' => 'sleipner-event-title'
-          ),
-          'value' => $this->post_title
-        ),
-
-        /* Event content */
-        array(
+        'sleipner_event_wrapper' => array(
           'type' => 'div',
           'attributes' => array(
-            'class' => 'sleipner-event-content'
+            'class' => 'sleipner-event-wrapper'
           ),
-          'value' => $this->post_content
-        ),
 
-        /* Clearfix */
-        array(
-          'type' => 'div',
-          'attributes' => array(
-            'class' => 'clearfix'
-          ),
-          'value' => ''
-        ),
-
-        array(
-          'type' => 'div',
-          'attributes' => array(
-            'class' => 'sleipner-event-section',
-          ),
           'value' => array(
-            
-            array(
-              'type' => 'div',
+
+            /* Event title */
+            'sleipner_event_title' => array(
+              'type' => 'h1',
               'attributes' => array(
-                'class' => 'sleipner-event-section-title',
+                'class' => 'sleipner-event-title'
               ),
-              'value' => __('Date and time', SLEIPNER_TEXTDOMAIN),
+              'value' => $this->post_title
             ),
 
-            array(
+            /* Event content */
+            'sleipner_event_content' => array(
               'type' => 'div',
               'attributes' => array(
-                'class' => 'sleipner-event-output-label'
+                'class' => 'sleipner-event-content'
               ),
-              'value' => __('Name', SLEIPNER_TEXTDOMAIN)
+              'value' => $this->post_content
             ),
 
-            array(
+            /* Clearfix */
+            'clearfix' => array(
               'type' => 'div',
               'attributes' => array(
-                'class' => 'sleipner-event-output-text'
+                'class' => 'clearfix'
               ),
-              'value' => $this->contact_name
+              'value' => ''
             ),
 
-            /* Contact email */
-            array(
+            'organizer_section' => array(
               'type' => 'div',
               'attributes' => array(
-                'class' => 'sleipner-event-output-label'
+                'class' => 'sleipner-event-section',
               ),
-              'value' => __('Email', SLEIPNER_TEXTDOMAIN)
+              'value' => array(
+                
+                'sleipnere_event_section_title' => array(
+                  'type' => 'div',
+                  'attributes' => array(
+                    'class' => 'sleipner-event-section-title',
+                  ),
+                  'value' => __('Organizer Info', SLEIPNER_TEXTDOMAIN),
+                ),
+
+                'name_label' => array(
+                  'type' => 'div',
+                  'attributes' => array(
+                    'class' => 'sleipner-event-output-label'
+                  ),
+                  'value' => __('Name', SLEIPNER_TEXTDOMAIN)
+                ),
+
+                'name_text' => array(
+                  'type' => 'div',
+                  'attributes' => array(
+                    'class' => 'sleipner-event-output-text'
+                  ),
+                  'value' => $this->contact_name
+                ),
+
+                /* Contact email */
+                'email_label' => array(
+                  'type' => 'div',
+                  'attributes' => array(
+                    'class' => 'sleipner-event-output-label'
+                  ),
+                  'value' => __('Email', SLEIPNER_TEXTDOMAIN)
+                ),
+
+                'email_text' => array(
+                  'type' => 'div',
+                  'attributes' => array(
+                    'class' => 'sleipner-event-output-text'
+                  ),
+                  'value' => $this->contact_email
+                ),
+
+                /* Contact phone */
+                'phone_label' => array(
+                  'type' => 'div',
+                  'attributes' => array(
+                    'class' => 'sleipner-event-output-label'
+                  ),
+                  'value' => __('Phone', SLEIPNER_TEXTDOMAIN)
+                ),
+
+                'phone_text' => array(
+                  'type' => 'div',
+                  'attributes' => array(
+                    'class' => 'sleipner-event-output-text'
+                  ),
+                  'value' => $this->contact_phone
+                ),
+
+                'clearfix' => array(
+                  'type' => 'div',
+                  'attributes' => array(
+                    'class' => 'sleipner-event-clearfix'
+                  )
+                )
+
+              )
+
             ),
 
-            array(
+            'date_time_section' => array(
               'type' => 'div',
               'attributes' => array(
-                'class' => 'sleipner-event-output-text'
+                'class' => 'sleipner-event-section',
               ),
-              'value' => $this->contact_email
+              'value' => array(
+                
+                /* Section title */
+                'sleipner_event_section_title' => array(
+                  'type' => 'div',
+                  'attributes' => array(
+                    'class' => 'sleipner-event-section-title',
+                  ),
+                  'value' => __('Date and time', SLEIPNER_TEXTDOMAIN),
+                ),
+
+                /* Date and starttime */
+                'startdate_time_label' => array(
+                  'type' => 'div',
+                  'attributes' => array(
+                    'class' => 'sleipner-event-output-label'
+                  ),
+                  'value' => __('Starts', SLEIPNER_TEXTDOMAIN)
+                ),
+
+                'startdate_time_text' => array(
+                  'type' => 'div',
+                  'attributes' => array(
+                    'class' => 'sleipner-event-output-text'
+                  ),
+                  'value' => $this->startdate . ' ' . $this->starttime,
+                ),
+
+                /* End date and time */
+                'enddate_time_label' => array(
+                  'type' => 'div',
+                  'attributes' => array(
+                    'class' => 'sleipner-event-output-label'
+                  ),
+                  'value' => __('Ends', SLEIPNER_TEXTDOMAIN),
+                ),
+
+                'enddate_time_text' => array(
+                  'type' => 'div',
+                  'attributes' => array(
+                    'class' => 'sleipner-event-output-text'
+                  ),
+                  'value' => $this->stopdate . ' ' . $this->stoptime,
+                ),
+
+                'clearfix' => array(
+                  'type' => 'div',
+                  'attributes' => array(
+                    'class' => 'sleipner-event-clearfix'
+                  )
+                )
+
+              )
+
             ),
 
-            /* Contact phone */
-            array(
+            'clearfix' => array(
               'type' => 'div',
               'attributes' => array(
-                'class' => 'sleipner-event-output-label'
+                'class' => 'clearfix'
               ),
-              'value' => __('Phone', SLEIPNER_TEXTDOMAIN)
-            ),
-
-            array(
-              'type' => 'div',
-              'attributes' => array(
-                'class' => 'sleipner-event-output-text'
-              ),
-              'value' => $this->contact_phone
-            ),
+              'value' => ''
+            )
 
           )
+        )
+      );
 
-        ),
 
-        array(
-          'type' => 'div',
-          'attributes' => array(
-            'class' => 'sleipner-event-section',
-          ),
-          'value' => array(
-            
-            /* Section title */
-            array(
-              'type' => 'div',
-              'attributes' => array(
-                'class' => 'sleipner-event-section-title',
-              ),
-              'value' => __('Date and time', SLEIPNER_TEXTDOMAIN),
-            ),
-
-            /* Date and starttime */
-            array(
-              'type' => 'div',
-              'attributes' => array(
-                'class' => 'sleipner-event-output-label'
-              ),
-              'value' => __('Starts', SLEIPNER_TEXTDOMAIN)
-            ),
-
-            array(
-              'type' => 'div',
-              'attributes' => array(
-                'class' => 'sleipner-event-output-text'
-              ),
-              'value' => $this->startdate . ' ' . $this->starttime,
-            ),
-
-            /* End date and time */
-            array(
-              'type' => 'div',
-              'attributes' => array(
-                'class' => 'sleipner-event-output-label'
-              ),
-              'value' => __('Ends', SLEIPNER_TEXTDOMAIN),
-            ),
-
-            array(
-              'type' => 'div',
-              'attributes' => array(
-                'class' => 'sleipner-event-output-text'
-              ),
-              'value' => $this->stopdate . ' ' . $this->stoptime,
-            ),
-
-          )
-
-        ),
+      // Don't display this if there is no location on event
+      if( !$this->location_no_location ) {
 
         /* Location section */
-        array(
-           'type' => 'div',
+        $event_output['sleipner_event_wrapper']['value']['location_section'] = array(
+          'type' => 'div',
           'attributes' => array(
             'class' => 'sleipner-event-section',
           ),
           'value' => array(
 
             /* Section title */
-            array(
+            'sleipner_event_section_title' => array(
               'type' => 'div',
               'attributes' => array(
                 'class' => 'sleipner-event-section-title',
@@ -716,7 +771,7 @@
             ),
 
             /* Location name */
-            array(
+            'name_label' => array(
               'type' => 'div',
               'attributes' => array(
                 'class' => 'sleipner-event-output-label'
@@ -724,7 +779,7 @@
               'value' => __('Name', SLEIPNER_TEXTDOMAIN)
             ),
 
-            array(
+            'name_text' => array(
               'type' => 'div',
               'attributes' => array(
                 'class' => 'sleipner-event-output-text'
@@ -733,7 +788,7 @@
             ),
 
             /* Location street address */
-            array(
+            'street_address_label' => array(
               'type' => 'div',
               'attributes' => array(
                 'class' => 'sleipner-event-output-label'
@@ -741,7 +796,7 @@
               'value' => __('Street address', SLEIPNER_TEXTDOMAIN)
             ),
 
-            array(
+            'street_addres_text' => array(
               'type' => 'div',
               'attributes' => array(
                 'class' => 'sleipner-event-output-text'
@@ -750,7 +805,7 @@
             ),
 
             /* Location zipcode */
-            array(
+            'zipcode_label' => array(
               'type' => 'div',
               'attributes' => array(
                 'class' => 'sleipner-event-output-label'
@@ -758,16 +813,16 @@
               'value' => __('Zipcode', SLEIPNER_TEXTDOMAIN)
             ),
 
-            array(
+            'zipcode_text' => array(
               'type' => 'div',
               'attributes' => array(
                 'class' => 'sleipner-event-output-text'
               ),
-              'value' => (strlen($this->location_zipcode)>0) ? $this->location_zipcode : '&nbsp;',
+              'value' => $this->location_zipcode
             ),
 
              /* Location city */
-            array(
+            'city_label' => array(
               'type' => 'div',
               'attributes' => array(
                 'class' => 'sleipner-event-output-label'
@@ -775,7 +830,7 @@
               'value' => __('City', SLEIPNER_TEXTDOMAIN)
             ),
 
-            array(
+            'city_text' => array(
               'type' => 'div',
               'attributes' => array(
                 'class' => 'sleipner-event-output-text'
@@ -783,30 +838,31 @@
               'value' => (strlen($this->location_city)>0) ? $this->location_city : '&nbsp;',
             ),
 
+            'clearfix' => array(
+              'type' => 'div',
+              'attributes' => array(
+                'class' => 'sleipner-event-clearfix'
+              )
+
+            )
+
           )
 
-        ),
+        );
 
-        array(
-          'type' => 'div',
-          'attributes' => array(
-            'class' => 'clearfix'
-          ),
-          'value' => ''
-        ),
-
-        array(
+        $event_output['sleipner_event_wrapper']['value']['map'] = array(
           'type' => 'div',
           'attributes' => array(
             'id' => 'sleipner-map-canvas'
           ),
           'value' => ''
-        )
+        );
 
-      );
+      } 
+      
 
       // Add filter to make it possible to change this array
-      $event_output = apply_filters( 'post_event_output_array_setup', $event_output );
+      $event_output = apply_filters( 'sleipner_single_event_output_array_setup', $event_output );
 
       // Create the actual HTML from the array
       $html = '';
@@ -821,7 +877,193 @@
     }
 
 
+    /**
+     * archive_template_output
+     * 
+     * Create the HTML output for an archive event template
+     * 
+     * @return The html
+     */
+    public function archive_template_output( $event = null ) {
 
+      $image = array();
+
+      // Get the event image
+      $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $this->ID ), 'thumbnail' );
+      if( !empty( $thumb[0] ) ) {
+        $image = array(
+          'type' => 'img',
+          'attributes' => array(
+            'src' => $thumb[0]
+          )
+        );
+      }
+
+      // Format the event date
+      $date = $this->startdate;
+      if( !empty( $this->stopdate ) && ( $this->startdate != $this->stopdate ) ) $date .= ' - ' . $this->stopdate;
+
+      $time = $this->starttime;
+      if( !empty( $this->stoptime ) && ( $this->starttime != $this->stoptime ) ) $time .= ' - ' . $this->stoptime;
+
+      // Get the post excerpt
+      $excerpt = apply_filters( 'get_the_excerpt', $this->post_excerpt );
+
+      $event_output = array(
+
+        'sleipner-archive-event-wrapper' => array(
+          'type' => 'div',
+          'attributes' => array(
+            'class' => 'sleipner-archive-event-wrapper',
+          ),
+          'value' => array(
+
+            /* Event title */
+            'sleipner-event-title' => array(
+              'type' => 'h3',
+              'attributes' => array(
+                'class' => 'sleipner-event-title'
+              ),
+              'value' => $this->post_title
+            ),
+
+            'img' => $image,
+
+            'sleipner-event-archive-content' => array(
+              'type' => 'div',
+              'attributes'=> array(
+                'class' => 'sleipner-event-archive-content'
+              ),
+              'value' => array(
+
+                /* Event time */
+                'date' => array(
+                  'type' => 'p',
+                  'value' => array(
+                    
+                    array(
+                      'type' => 'strong',
+                      'value' => __( 'Date', SLEIPNER_TEXTDOMAIN )
+                    ),
+
+                    array(
+                      'type' => 'text',
+                      'value' => $date
+                    )
+
+                  )
+                ),
+
+                'time' => array(
+                  'type' => 'p',
+                  'value' => array(
+                    
+                    array(
+                      'type' => 'strong',
+                      'value' => __( 'Time', SLEIPNER_TEXTDOMAIN )
+                    ),
+
+                    array(
+                      'type' => 'text',
+                      'value' => $time
+                    )
+
+                  )
+                ),
+
+                /* Event description */
+                'sleipner-event-archive-description' => array(
+                  'type' => 'strong',
+                  'attributes' => array(
+                    'class' => 'sleipner-event-archive-description',
+                  ),
+                  'value' => __( 'Description', SLEIPNER_TEXTDOMAIN )
+                ),
+
+                'sleipner-event-archive-excerpt' => array(
+                  'type' => 'div',
+                  'attributes' => array(
+                    'class' => 'sleipner-archive-event-excerpt'
+                  ),
+                  'value' => array(
+                    array(
+                      'type' => 'p',
+                      'value' => $excerpt
+                    )
+                  )
+                ),
+
+              ),
+
+            ),
+
+            'link' => array(
+              'type' => 'a',
+              'attributes' => array(
+                'href' => get_permalink( $this->ID )
+              ),
+              'value' => array(
+                
+                array(
+                  'type' => 'text',
+                  'value' => __( 'Read more', SLEIPNER_TEXTDOMAIN )
+                )
+
+              )
+
+            ),
+
+            'clearfix' => array(
+              'type' => 'div',
+              'attributes' => array(
+                'class' => 'sleipner-event-clearfix'
+              )
+            )
+
+          )
+
+        )
+
+      );
+
+
+      // Don't display this if there is no location on event
+      if( !$this->location_no_location ) {
+        
+        $event_output['sleipner-archive-event-wrapper']['value']['sleipner-event-archive-content']['value']['place'] = array(
+          'type' => 'p',
+          'value' => array(
+            
+            array(
+              'type' => 'strong',
+              'value' => __( 'Place', SLEIPNER_TEXTDOMAIN )
+            ),
+
+            array(
+              'type' => 'text',
+              'value' => $this->location_name
+            )
+
+          )
+
+        );
+
+      }
+
+      // Add filter to make it possible to change this array
+      $event_output = apply_filters( 'sleipner_archive_event_output_array_setup', $event_output );
+
+      // Create the actual HTML from the array
+      $html = '';
+      foreach( $event_output as $eo ) {
+        $html .= \Sleipner\Core\HTML::fromArray( $eo );
+      }
+
+      
+      // Apply filter to make it possible to change the html output
+      return apply_filters( 'sleipner_archive_template', $html );
+
+    }
 
 	}
 
