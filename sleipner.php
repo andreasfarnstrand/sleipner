@@ -2,7 +2,7 @@
 
 	/*
 	Plugin Name: Sleipner
-	Description: Sleipner is an event administration plugin. It is the base event plugin and has a range of plugins to extend it's functionality
+	Description: Sleipner is an event administration plugin. It is the base event plugin with some basic event functionality. The plan is to have a range of plugins to extend it's functionality.
 	Version: 1.0
 	Author: Andreas Färnstrand <andreas@farnstranddev.se>
 	Author URI: http://www.farnstranddev.se
@@ -38,10 +38,7 @@
 	 */
 	
 	/**
-	 * @todo  Need to implements som conditions for displaying different options.
-	 * For example the map should not display when there is no location set.
-	 * 
-	 * @todo  Remove &nbsp;
+	 * @todo
 	 */
 	
 	namespace Sleipner;
@@ -52,8 +49,10 @@
 	// Setup the constants
 	define( 'SLEIPNER_PATH', dirname( __FILE__ ) );
 	define( 'SLEIPNER_URL', plugin_dir_url( __FILE__ ) );
-	define( 'SLEIPNER_TEXTDOMAIN', 'sleipner_base_textdomain' );
+	define( 'SLEIPNER_TEXTDOMAIN', 'sleipner' );
+	define( 'SLEIPNER_TEXTDOMAIN_PATH', dirname( plugin_basename( __FILE__) ) .'/languages/' );
 	define( 'SLEIPNER_VERSION', 1.0 );
+
 
 	// Load all needed classes
 	require_once( 'classes/core/class-util.php' );
@@ -80,16 +79,17 @@
  	if( !function_exists('sleipner_class_autoloader' ) ) {
    	function sleipner_class_autoloader( $class ){
    		
-   		$class=strtolower($class);
+   		$class = strtolower($class);
     	$class_file = SLEIPNER_PATH . 'classes/posttypes/class-'.$class.'.php';
     	$class_file = str_replace( '_', '-', $class_file);
 
     	if( is_file( $class_file ) && !class_exists( $class ) ) {
-    		include_once( $classFile );
+    		include_once( $class_file );
     	}
         
     }
   }
   spl_autoload_register('Sleipner\sleipner_class_autoloader');
+
 
 ?>

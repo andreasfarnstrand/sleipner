@@ -27,6 +27,9 @@
 			// Setup the custom posttype Sleipner_Event
 			add_action( 'init', array( 'Sleipner\Posttypes\Sleipner_Event', 'init' ) );
 
+			// Load translations
+      add_action( 'plugins_loaded', array( $this, 'load_translations') );
+
 			// Check if we need to add the frontend javascripts 
 			add_action( 'wp_enqueue_scripts', array( 'Sleipner\Posttypes\Sleipner_Event', 'scripts' ) );
 
@@ -45,6 +48,19 @@
 			}
 
 		}
+
+
+		/**
+     * load_translations
+     * 
+     * Load the correct plugin translation file
+     */
+    public function load_translations() {
+
+    	if( file_exists( SLEIPNER_TEXTDOMAIN_PATH ) ) die('yup');
+      load_plugin_textdomain( SLEIPNER_TEXTDOMAIN, false, SLEIPNER_TEXTDOMAIN_PATH );
+
+    }
 
 
 		/**

@@ -1,0 +1,283 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: sleipner\n"
+"POT-Creation-Date: 2014-10-27 10:08+0100\n"
+"PO-Revision-Date: 2014-10-27 10:18+0100\n"
+"Last-Translator: Andeas Färnstrand <andreas@farnstranddev.se>\n"
+"Language-Team: \n"
+"Language: Swedish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: classes/core/posttypes/class-posttype-model.php:245
+msgid "Failed to validate one or more fields."
+msgstr "Misslyckades att validera ett eller flera fält"
+
+#: classes/posttypes/class-sleipner-event.php:55
+msgid "The organizer contact email failed to validate."
+msgstr "Misslyckades att validera organisatörens epost"
+
+#: classes/posttypes/class-sleipner-event.php:241
+msgid "Create new"
+msgstr "Skapa ny"
+
+#: classes/posttypes/class-sleipner-event.php:242
+msgid "Event"
+msgstr "Evenemang"
+
+#: classes/posttypes/class-sleipner-event.php:243
+msgid "Create new event"
+msgstr "Skapa nytt evenemang"
+
+#: classes/posttypes/class-sleipner-event.php:244
+msgid "Edit Event"
+msgstr "Ändra evenemang"
+
+#: classes/posttypes/class-sleipner-event.php:245
+msgid "New Event"
+msgstr "Nytt evenemang"
+
+#: classes/posttypes/class-sleipner-event.php:246
+msgid "All Events"
+msgstr "Alla evenemang"
+
+#: classes/posttypes/class-sleipner-event.php:247
+msgid "View Event"
+msgstr "Visa evenemang"
+
+#: classes/posttypes/class-sleipner-event.php:248
+msgid "Search event"
+msgstr "Sök evenemang"
+
+#: classes/posttypes/class-sleipner-event.php:249
+msgid "No events found"
+msgstr "Inga evenemang funna"
+
+#: classes/posttypes/class-sleipner-event.php:250
+msgid "No events found in bin"
+msgstr "Inga evenemang funna i papperskorgen"
+
+#: classes/posttypes/class-sleipner-event.php:279
+#: classes/base/class-sleipner-settings.php:205
+msgid "Categories"
+msgstr "Kategorier"
+
+#: classes/posttypes/class-sleipner-event.php:280
+msgid "All event categories"
+msgstr "Alla evenemangskategorier"
+
+#: classes/posttypes/class-sleipner-event.php:281
+msgid "Current event categories"
+msgstr "Nuvarande evenemangskategorier"
+
+#: classes/posttypes/class-sleipner-event.php:282
+msgid "Current event categories:"
+msgstr "Nuvarande evenemangskategorier:"
+
+#: classes/posttypes/class-sleipner-event.php:283
+msgid "New event category"
+msgstr "Ny evenemangskategori"
+
+#: classes/posttypes/class-sleipner-event.php:284
+msgid "Create new event category"
+msgstr "Skapa ny evenemangskategori"
+
+#: classes/posttypes/class-sleipner-event.php:285
+msgid "Edit event category"
+msgstr "Ändra evenemangskategori"
+
+#: classes/posttypes/class-sleipner-event.php:286
+msgid "Update event category"
+msgstr "Uppdatera evenemangskategori"
+
+#: classes/posttypes/class-sleipner-event.php:287
+msgid "Separate event categories with a comma sign"
+msgstr "Separera evenemangskategori med kommatecken"
+
+#: classes/posttypes/class-sleipner-event.php:288
+msgid "Search event categories"
+msgstr "Sök evenemangskategori"
+
+#: classes/posttypes/class-sleipner-event.php:289
+msgid "Add or remove event categooies"
+msgstr "Lägg till eller ta bort evenemangskategori"
+
+#: classes/posttypes/class-sleipner-event.php:290
+msgid "Chose among the most used event categories"
+msgstr "Välj bland de mest använda evenemangskategorierna"
+
+#: classes/posttypes/class-sleipner-event.php:291
+msgid "Found no event categories"
+msgstr "Hittade inga evenemangskategorier"
+
+#: classes/posttypes/class-sleipner-event.php:361
+msgid "Organizer"
+msgstr "Organisatör"
+
+#: classes/posttypes/class-sleipner-event.php:368
+#: classes/posttypes/class-sleipner-event.php:692
+msgid "Date and time"
+msgstr "Datum och tid"
+
+#: classes/posttypes/class-sleipner-event.php:375
+#: classes/posttypes/class-sleipner-event.php:770
+msgid "Location"
+msgstr "Plats"
+
+#: classes/posttypes/class-sleipner-event.php:451
+#: classes/posttypes/class-sleipner-event.php:623
+#: classes/posttypes/class-sleipner-event.php:779
+msgid "Name"
+msgstr "Namn"
+
+#: classes/posttypes/class-sleipner-event.php:453
+#: classes/posttypes/class-sleipner-event.php:640
+msgid "Email"
+msgstr "Epost"
+
+#: classes/posttypes/class-sleipner-event.php:455
+#: classes/posttypes/class-sleipner-event.php:657
+msgid "Phone"
+msgstr "Telefon"
+
+#: classes/posttypes/class-sleipner-event.php:479
+msgid "Start date"
+msgstr "Statdatum"
+
+#: classes/posttypes/class-sleipner-event.php:481
+msgid "End date"
+msgstr "Slutdatum"
+
+#: classes/posttypes/class-sleipner-event.php:484
+msgid "Start time"
+msgstr "Starttid"
+
+#: classes/posttypes/class-sleipner-event.php:486
+msgid "End time"
+msgstr "Sluttid"
+
+#: classes/posttypes/class-sleipner-event.php:527
+msgid ""
+"This event has no location (no map or address fields will be shown on post)"
+msgstr ""
+"Detta evenemang har ingen plats(ingen karta eller platsinformation kommer "
+"att visas på evenemanget)"
+
+#: classes/posttypes/class-sleipner-event.php:529
+msgid "Location name"
+msgstr "Platsnamn"
+
+#: classes/posttypes/class-sleipner-event.php:531
+#: classes/posttypes/class-sleipner-event.php:796
+msgid "Street address"
+msgstr "Gatuadress"
+
+#: classes/posttypes/class-sleipner-event.php:533
+#: classes/posttypes/class-sleipner-event.php:813
+msgid "Zipcode"
+msgstr "Postnummer"
+
+#: classes/posttypes/class-sleipner-event.php:535
+#: classes/posttypes/class-sleipner-event.php:830
+msgid "City"
+msgstr "Ort"
+
+#: classes/posttypes/class-sleipner-event.php:541
+msgid "Country"
+msgstr "Land"
+
+#: classes/posttypes/class-sleipner-event.php:615
+msgid "Organizer Info"
+msgstr "Organisatörsinfo"
+
+#: classes/posttypes/class-sleipner-event.php:701
+msgid "Starts"
+msgstr "Startar"
+
+#: classes/posttypes/class-sleipner-event.php:718
+msgid "Ends"
+msgstr "Slutar"
+
+#: classes/posttypes/class-sleipner-event.php:946
+msgid "Date"
+msgstr "Datum"
+
+#: classes/posttypes/class-sleipner-event.php:963
+msgid "Time"
+msgstr "Tid"
+
+#: classes/posttypes/class-sleipner-event.php:980
+msgid "Description"
+msgstr "Beskrivning"
+
+#: classes/posttypes/class-sleipner-event.php:1009
+msgid "Read more"
+msgstr "Läs mer"
+
+#: classes/posttypes/class-sleipner-event.php:1039
+msgid "Place"
+msgstr "Plats"
+
+#: classes/base/class-sleipner-settings.php:90
+msgid "Sleipner"
+msgstr "Sleipner"
+
+#: classes/base/class-sleipner-settings.php:108
+msgid "Sleipner Settings"
+msgstr "Sleipnerinställningar"
+
+#: classes/base/class-sleipner-settings.php:139
+msgid "Events"
+msgstr "Evenemang"
+
+#: classes/base/class-sleipner-settings.php:146
+msgid "Enable display country on event location"
+msgstr "Aktivera landsvisning på evenemangets plats"
+
+#: classes/base/class-sleipner-settings.php:154
+msgid "Google maps API key"
+msgstr "Google maps apinyckel"
+
+#: classes/base/class-sleipner-settings.php:162
+msgid "Set the default start location of the event map."
+msgstr "Sätt standard startplats för evenemangskartan "
+
+#: classes/base/class-sleipner-settings.php:186
+msgid "Set a hue to the map. Default is no hue."
+msgstr "Sätt nyans för kartan. Standard är utan nyans."
+
+#: classes/base/class-sleipner-settings.php:194
+msgid "Enable default css for the event templates."
+msgstr "Aktivera standardcss för evenemangsmallar"
+
+#: classes/base/class-sleipner-settings.php:212
+msgid "Enable categories on events"
+msgstr "Aktivera kategorier för evenemang"
+
+#: templates/single-sleipner_event.php:25
+msgid "Post navigation"
+msgstr "Evenemangsnavigation"
+
+#: templates/archive-sleipner_event.php:31
+#, php-format
+msgid "Daily Archives: %s"
+msgstr "Dagliga arkiv: %s"
+
+#: templates/archive-sleipner_event.php:34
+#, php-format
+msgid "Monthly Archives: %s"
+msgstr "Månatliga arkiv: %s"
+
+#: templates/archive-sleipner_event.php:37
+#, php-format
+msgid "Yearly Archives: %s"
+msgstr "Årliga arkiv: %s"
+
+#: templates/archive-sleipner_event.php:40
+msgid "Archives"
+msgstr "Arkiv"

@@ -5,4 +5,5 @@
 	cursor: pointer;
 }
 
+/* Display fix for datepicker */
 #ui-datepicker-div {display: none;}
