@@ -1,6 +1,6 @@
 <?php
 /**
- * The Template for displaying all single Sleipner Events
+ * The Template for displaying a single Sleipner Events
  *
  * @package Sleipner
  */
