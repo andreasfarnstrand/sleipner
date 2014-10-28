@@ -877,7 +877,7 @@
       // Create the actual HTML from the array
       $html = '';
       foreach( $event_output as $eo ) {
-        $html .= \Sleipner\Core\HTML::fromArray( $eo );
+        $html .= \Sleipner\Core\HTML::from_array( $eo );
       }
 
       
@@ -1066,7 +1066,7 @@
       // Create the actual HTML from the array
       $html = '';
       foreach( $event_output as $eo ) {
-        $html .= \Sleipner\Core\HTML::fromArray( $eo );
+        $html .= \Sleipner\Core\HTML::from_array( $eo );
       }
 
       

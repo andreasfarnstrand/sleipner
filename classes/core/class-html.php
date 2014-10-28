@@ -14,7 +14,7 @@
   class HTML {
 
     /**
-     * fromArray
+     * from_array
      * 
      * A static function that traverses an array with
      * html elements and converts it into a HTML string.
@@ -24,7 +24,7 @@
      * 
      * @return the html string to return
      */
-    public static function fromArray( $array ) {
+    public static function from_array( $array ) {
 
       // No type? Then don't parse the array element
       if( !isset( $array['type'] ) ) return '';
@@ -56,7 +56,7 @@
 
         foreach( $array['value'] as $element ) {
           
-          $html .= self::fromArray( $element );
+          $html .= self::from_array( $element );
 
         }
 
