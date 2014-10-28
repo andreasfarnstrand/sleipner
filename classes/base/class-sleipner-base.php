@@ -36,6 +36,10 @@
 			// Filter to override the default templating for the custom post type
 			add_filter( 'template_include', array( $this, 'template_include' ), 99 );
 
+			// Filter when updatig the option. Need to set a few other options
+			// When updating this one.
+			add_filter( 'pre_update_option_sleipner', array( $this, 'update_option_event_slug' ), 10, 2 );
+
 			// If this is an admin page
 			if( is_admin() ) {
 				add_action( 'add_meta_boxes', array( 'Sleipner\Posttypes\Sleipner_Event', 'admin_interface' ) );	
@@ -57,9 +61,30 @@
      */
     public function load_translations() {
 
-    	if( file_exists( SLEIPNER_TEXTDOMAIN_PATH ) ) die('yup');
       load_plugin_textdomain( SLEIPNER_TEXTDOMAIN, false, SLEIPNER_TEXTDOMAIN_PATH );
 
+    }
+
+
+    /**
+     * update_option_event_slug
+     * 
+     * Set some extra options on plugin options save.
+     * 
+     * @param array $new_value
+     * @param array $old_value
+     * 
+     * @return array
+     */
+    public function update_option_event_slug( $new_value, $old_value ) {
+    	
+
+    	if( $new_value['event_slug'] != $old_value['event_slug'] ) {
+    		$new_value['flush_rewrite'] = true;
+    	}
+
+    	return $new_value;
+    	
     }
 
 

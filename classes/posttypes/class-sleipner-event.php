@@ -235,6 +235,11 @@
 
       $options = get_option('sleipner');
 
+      $slug = 'event';
+      if( !empty( $options['event_slug'] ) ) {
+        $slug = $options['event_slug'];
+      }
+
       $posttype_labels = array(
         'name' => _x( 'Event', 'post type general name', SLEIPNER_TEXTDOMAIN ),
         'singular_name' => _x( 'Event', 'post type singular name', SLEIPNER_TEXTDOMAIN ),
@@ -263,7 +268,7 @@
         'exclude_from_search' => false,
         'has_archive' => true,
         'rewrite' => array(
-          'slug' => 'event',
+          'slug' => $slug,
         ),
         'taxonomies' => array( 'sleipner_category' )
       ));
@@ -312,7 +317,12 @@
 
       }
 
-      //flush_rewrite_rules();
+      // Update the posttype slug if necessary
+      if( !empty( $options['flush_rewrite'] ) && $options['flush_rewrite'] == true ) {
+        flush_rewrite_rules();
+        unset( $options['flush_rewrite'] );
+        update_option( 'sleipner', $options );
+      }
 
     }
 

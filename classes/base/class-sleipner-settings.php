@@ -95,8 +95,9 @@
 
     }
 
+
     /**
-     * create_admin_pahe
+     * create_admin_page
      * 
      * Options page callback that actually 
      * creates the options page
@@ -197,6 +198,14 @@
         'events' // Section           
       );
 
+      add_settings_field(
+        'slug', // ID
+        __( 'Override the default(event) event slug', SLEIPNER_TEXTDOMAIN ), // Title 
+        array( $this, 'override_slug_callback' ), // Callback
+        'sleipner', // Page
+        'events' // Section           
+      );
+
 
       /* SECTION CATEGORIES */
 
@@ -214,6 +223,8 @@
         'sleipner', // Page
         'categories' // Section           
       );
+
+
 
     }
 
@@ -238,6 +249,7 @@
       $new_input['map_default_lng'] = isset( $input['map_default_lng'] ) ? (float) $input['map_default_lng'] : null;
       $new_input['map_default_zoomlevel'] = isset( $input['map_default_zoomlevel'] ) ? $input['map_default_zoomlevel'] : null;
       $new_input['map_hue'] = isset( $input['map_hue'] ) ? $input['map_hue'] : null;
+      $new_input['event_slug'] = isset( $input['event_slug'] ) ? $input['event_slug'] : null;
 
       return $new_input;
       
@@ -355,6 +367,19 @@
 
       $checked = ($this->enable_categories == true) ? $this->enable_categories : false;
       echo '<input type="checkbox" name="sleipner[enable_categories]"' . checked( $checked, true, false ) . '/><br />';
+
+    }
+
+    /**
+     * event_enable_categories_callback
+     * 
+     * HTML Callback
+     */
+    public function override_slug_callback() {
+
+      $slug = isset( $this->options['event_slug'] ) ? $this->options['event_slug'] : null;
+      echo '<input type="text" id="sleipner-event-slug" value="' . $slug . '" name="sleipner[event_slug]" /><br />';
+      echo '<p class="description">' . __( 'Make sure to not use an already taken slug. After changing this, make sure to also update the permalinks. Settings->permalinks in admin menu.', SLEIPNER_TEXTDOMAIN ) . '</p>';
 
     }
 

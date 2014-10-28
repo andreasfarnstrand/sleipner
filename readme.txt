@@ -7,11 +7,11 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Sleipner is an event manager meant to have a lot of extendable features. It is a work in progress.
+Manage your events with Sleipner.
 
 == Description ==
 
-Manage your events with Sleipner.
+Sleipner is an event manager meant to have a lot of extendable features. It is a work in progress.
 
 = Shortcodes =
 
