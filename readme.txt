@@ -11,8 +11,8 @@ Manage your events with Sleipner. An event managing plugin with Google Maps inte
 
 == Description ==
 
-Sleipner is an event manager with Google Maps integration. It is still under development and I will be adding new features in a steady pace.
-If you have any feature requests or bug fixes please send an email to andreas@farnstranddev.se and I'll look into adding/fixing them.
+Sleipner is an event manager with Google Maps integration. It is still under development and I will be adding new features at a steady pace.
+Feel free to send me feedback, feature requests etc for inclusion. A documentation page will be coming shortly.
 
 = Features = 
 * Creating events with start date/time and end date/time.
@@ -57,5 +57,3 @@ If you have any feature requests or bug fixes please send an email to andreas@fa
 
 = 1.0.0 =
 * Initial version
-
-
