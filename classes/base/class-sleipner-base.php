@@ -11,8 +11,11 @@
 
 	namespace Sleipner\Base;
 
+	require_once( 'class-sleipner-shortcode.php' );
+
 	use Sleipner\Core\Posttypes;
 	use Sleipner\Posttypes\Sleipner_Event;
+	use Sleipner\Posttypes\Shortcode;
 
 	class Sleipner_Base {
 
@@ -50,6 +53,10 @@
 
 				$this->settings();
 			}
+
+			/* Shortcodes */
+
+			add_shortcode( 'sleipner_event', array( 'Sleipner\Base\Shortcode', 'event' ), 10, 1 );
 
 		}
 

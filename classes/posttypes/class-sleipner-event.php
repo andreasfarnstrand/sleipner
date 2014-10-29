@@ -917,7 +917,7 @@
       if( !empty( $this->stoptime ) && ( $this->starttime != $this->stoptime ) ) $time .= ' - ' . $this->stoptime;
 
       // Get the post excerpt
-      $excerpt = apply_filters( 'get_the_excerpt', $this->post_excerpt );
+      $excerpt = apply_filters( 'sleipner_get_the_event_excerpt', $this->post_excerpt );
 
       $event_output = array(
 

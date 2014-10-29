@@ -7,17 +7,39 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Manage your events with Sleipner.
+Manage your events with Sleipner. An event managing plugin with Google Maps integration.
 
 == Description ==
 
-Sleipner is an event manager meant to have a lot of extendable features. It is a work in progress.
+Sleipner is an event manager with Google Maps integration. It is still under development and I will be adding new features in a steady pace.
+If you have any feature requests or bug fixes please send an email to andreas@farnstranddev.se and I'll look into adding/fixing them.
+
+= Features = 
+* Creating events with start date/time and end date/time.
+* Google Maps integration
+* Editing of event post type slug
+* Event categories
 
 = Shortcodes =
-
+* [sleipner_event id=""]
 
 = Filters =
 
+* sleipner_pre_create_post
+* sleipner_post_create_post
+
+* sleipner_default_validation_error_text
+
+* sleipner_pre_query_args
+* sleipner_pre_register_posttype
+* sleipner_pre_register_taxonomy
+
+* sleipner_single_event_output_array_setup
+* sleipner_archive_event_output_array_setup
+
+* sleipner_single_template
+* sleipner_get_the_event_excerpt
+* sleipner_archive_template
 
 == Installation ==
 

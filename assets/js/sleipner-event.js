@@ -4,8 +4,6 @@ This is the main frontend js file for the custom post type sleipner event
  */
 jQuery( document ).ready( function($) {
 
-  console.log(SLEIPNER);
-
   var map = null;
   var marker = null;
 

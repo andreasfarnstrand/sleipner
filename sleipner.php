@@ -30,16 +30,23 @@
 	| AVAILABLE SLEIPNER FILTERS
 	|---------------------------------------
 
-	sleipner_default_validation_error_text
-	sleipner_pre_create_post
-	sleipner_post_create_post
-	sleipner_pre_update_meta_data
-	post_event_output_array_setup - Filter the array that sets up the single template output
-	 */
-	
-	/**
-	 * @todo
-	 */
+	* sleipner_pre_create_post
+	* sleipner_post_create_post
+
+	* sleipner_default_validation_error_text
+
+	* sleipner_pre_query_args
+	* sleipner_pre_register_posttype
+	* sleipner_pre_register_taxonomy
+
+	* sleipner_single_event_output_array_setup
+	* sleipner_archive_event_output_array_setup
+
+	* sleipner_single_template
+	* sleipner_get_the_event_excerpt
+	* sleipner_archive_template
+	*/
+
 	
 	namespace Sleipner;
 
